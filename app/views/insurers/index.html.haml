@@ -1,0 +1,7 @@
+.insurer-wrapper
+  %ul
+    - @insurers.each do |insurer|
+      %li
+        = link_to insurer.name, insurer.affiliate_link
+        %li
+          = insurer.description

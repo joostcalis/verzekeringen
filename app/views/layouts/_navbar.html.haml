@@ -1,0 +1,19 @@
+- insurers = Insurer.all
+%nav{ class: ['navbar', 'navbar-toggleable-md', 'navbar-light', 'bg-faded', 'main-navbar'], role: 'navigation' }
+  %button{ class: ['navbar-toggler', 'navbar-toggler-right'], data: {toggle: 'collapse', target: "#navbarSupportedContent"} }
+    %span.navbar-toggler-icon
+  = link_to 'Home', root_path, class: 'navbar-brand'
+  - if !admin_signed_in_scope?
+    %div{ class: ['collapse', 'navbar-collapse'], id: 'navbarSupportedContent' }
+      %ul{ class: ['mr-auto', 'navbar-nav'] }
+        - insurers.each do |insurer|
+          %li.nav-item
+            = link_to insurer.name, insurer_path(insurer), class: 'nav-link'
+  - elsif admin_signed_in_scope?
+    %div{ class: ['collapse', 'navbar-collapse'], id: 'navbarSupportedContent' }
+      %ul{ class: ['mr-auto', 'navbar-nav'] }
+        %li.nav-item
+          = link_to 'Verzekeringen', admins_insurers_path, class: 'nav-link'
+      %ul{ class: ['nav', 'navbar-nav'] }
+        %li.nav-item
+          = link_to 'Log uit', destroy_admin_session_path, class: ['btn', 'btn-primary'], method: :delete

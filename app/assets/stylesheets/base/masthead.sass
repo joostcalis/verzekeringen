@@ -1,0 +1,29 @@
+.masthead
+  position: relative
+  color: white
+  min-height: 500px
+  background-image: (linear-gradient(90deg, rgba(0,53,52,89),rgba(0,80,80,49)))
+
+  &:after
+    content: ''
+    background-image: image-url('masthead/masthead2.jpg')
+    background-size: cover
+    background-position: bottom center
+    height: 100%
+    z-index: 1
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    opacity: 1
+
+  .main-headline-area
+    width: 620px
+    position: relative
+    z-index: 2
+    +sans-serif-medium
+    font-size: 40px
+    line-height: 60px
+    padding-top: 50px
+    padding-left: 25px

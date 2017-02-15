@@ -1,0 +1,27 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-12
+        %table{ class: 'table', id: 'comparison-table' }
+          %td
+            = ''
+          %td.table-header
+            = 'Omschrijving'
+          %td.table-header
+            = 'Prijs p/m'
+          %td.table-header
+            = 'Verzekerd bedrag'
+          %td
+            = ''
+          - @insurers.each do |insurer|
+            %tr
+              %td
+                = link_to insurer.name, admins_insurer_path(insurer), class: ['clickable-cell']
+              %td
+                = insurer.description
+              %td
+                = insurer.price
+              %td
+                = insurer.insured_amount
+              %td
+                = link_to 'Aanpassen', admins_insurer_path(insurer), class: ['btn', 'btn-success']

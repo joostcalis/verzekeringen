@@ -1,0 +1,23 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-6.offset-md-3
+        .form-holder
+          %p.form-header
+            = @insurer.name
+          = simple_form_for [:admins, @insurer] do |f|
+
+            = f.error_notification
+            .form-inputs
+              = f.input :name
+              = f.input :description
+              = f.input :price
+              = f.input :insured_amount
+              = f.input :extra_info
+              = f.input :affiliate_link
+              = f.input :meta_description
+              = f.input :meta_keywords
+              = f.input :meta_page_title
+
+            .form-actions
+              = f.button :submit, 'Opslaan', id: 'action_save_insurer', class: ['btn', 'btn-success']
