@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20170214210743) do
     t.decimal  "insured_amount",   precision: 8, scale: 2
     t.text     "extra_info"
     t.string   "affiliate_link"
+    t.boolean  "published"
     t.text     "meta_description"
     t.text     "meta_keywords"
     t.text     "meta_page_title"
