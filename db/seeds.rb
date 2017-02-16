@@ -8,8 +8,10 @@
 
 def clear_db
   puts 'clearing database'
+  Question.destroy_all
   Insurer.destroy_all
   Admin.destroy_all
+  Answer.destroy_all
 end
 
 def create_insurers
@@ -46,6 +48,29 @@ def create_admins
   )
 end
 
+def create_question(content)
+  Question.create(
+    content: content,
+    published: true
+  )
+end
+
+def create_answers
+  puts 'creating faqs and answers'
+  answers = ['Dat weet je nooit, het zou zo maar kunnen', 'Verzeker je bij ons en we vertellen je het', 'Filosofisch gezien zou het in principe kunnen']
+  ['Bestaat er een god?', 'Ben ik verzekerd van een plekje in de hemel?', 'Wanneer is het mijn tijd?'].each do |question|
+    question = create_question(question)
+    Insurer.all.each do |insurer|
+      Answer.create(
+        content: answers.sample,
+        question: question,
+        insurer: insurer
+      )
+    end
+  end
+end
+
 clear_db
 create_insurers
 create_admins
+create_answers
