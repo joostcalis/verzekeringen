@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  resources :insurers, only: [:index, :show]
+  resources :insurers, only: [:index, :show], path: 'uitvaart-verzekeraars'
+  resources :questions, only: [:index], path: 'veelgestelde-vragen'
 
   namespace :admins do
     get '/control-panel', to: 'control_panel#show'
