@@ -1,0 +1,19 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-12
+        %h2
+          = 'Vergelijk direct de antwoorden van elke uitvaartverzekeraar op al uw veelgestelde vragen'
+        %p
+          = 'Tot welk bedrag gaan de verschillende uitvaartverzekeringen? Ik zie een hele goedkope uitvaartverzekering, maar wat voor dekking heb ik dan eigenlijk? Vergelijk hier per uitvaartverzekeraar de antwoorden die zij geven op al uw veelgestelde vragen.'
+    .row
+      .col-md-12
+        %ul
+          - @questions.each do |question|
+            %li
+              = question.content
+              %ul
+                - Insurer.all.each do |insurer|
+                  %li
+                    - if question.answers.map(&:insurer).include?(insurer)
+                      = "#{insurer.name} - #{insurer.answers.where(question_id: question.id).first.content}"
