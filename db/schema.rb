@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170217103705) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "answers", force: :cascade do |t|
+    t.string   "slug"
     t.integer  "insurer_id"
     t.integer  "question_id"
     t.text     "content"
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170217103705) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "insurers", force: :cascade do |t|
+    t.string   "slug"
     t.string   "name"
     t.text     "description"
     t.decimal  "price",            precision: 8, scale: 2
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170217103705) do
   end
 
   create_table "questions", force: :cascade do |t|
+    t.string   "slug"
     t.text     "content"
     t.boolean  "published"
     t.datetime "created_at", null: false
