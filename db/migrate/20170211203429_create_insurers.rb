@@ -1,6 +1,7 @@
 class CreateInsurers < ActiveRecord::Migration
   def change
     create_table :insurers do |t|
+      t.string :slug, add_index: true, unique: true
       t.string :name, add_index: true, unique: true
       t.text :description
       t.decimal :price, precision: 8, scale: 2
