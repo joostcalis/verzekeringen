@@ -11,7 +11,7 @@
         %ul
           - @questions.each do |question|
             %li
-              = question.content
+              = link_to question.content, question_path(question)
               %ul
                 - Insurer.all.each do |insurer|
                   %li

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :insurers, only: [:index, :show], path: 'uitvaart-verzekeraars'
-  resources :questions, only: [:index], path: 'veelgestelde-vragen'
+  resources :questions, only: [:index, :show], path: 'veelgestelde-vragen'
 
   namespace :admins do
     get '/control-panel', to: 'control_panel#show'
