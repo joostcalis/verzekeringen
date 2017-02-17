@@ -11,7 +11,7 @@ class InsurersController < ApplicationController
   protected
 
     def find_insurer
-      @insurer = Insurer.find(params[:id])
+      @insurer = Insurer.friendly.find(params[:id])
     end
 
 end
