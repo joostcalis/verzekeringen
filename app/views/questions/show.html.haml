@@ -1,0 +1,14 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-12
+        %h2
+          = @question.content
+    .row
+      .col-md-12
+        %ul
+          - Insurer.all.each do |insurer|
+            %li
+              - if @question.answers.map(&:insurer).include?(insurer)
+                = "#{insurer.name} - #{insurer.answers.where(question_id: @question.id).first.content}"
+                = link_to 'Bereken premie', insurer.affiliate_link, class: ['btn', 'btn-primary']
