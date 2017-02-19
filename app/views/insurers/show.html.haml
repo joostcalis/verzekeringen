@@ -1,7 +1,28 @@
-.insurer-wrapper
-  %p
-    = @insurer.name
-  %p
-    = @insurer.description
-  %p
-    = @insurer.extra_info
+.masthead.sub-masthead
+  .main-single-header
+    %h1
+      = @insurer.name
+.main-logo.margin-top.margin-bottom-extra
+  = image_tag @insurer.logo.main_logo.url
+.container
+  .row
+    .col-md-3
+      %p
+        = @insurer.name
+    .col-md-3
+      %p
+        = @insurer.description
+    .col-md-3
+      %p
+        = @insurer.extra_info
+    .col-md-3
+      = link_to 'Bereken premie', @insurer.affiliate_link, class: ['btn', 'btn-primary']
+.container
+  .row
+    %ul
+      - @insurer_questions.each do |question|
+        %li
+          = question.content
+        %ul
+          %li
+            = question.answers.where(insurer_id: @insurer.id).first.content

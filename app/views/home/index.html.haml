@@ -12,10 +12,10 @@
           = 'Vergelijk uitvaartverzekeringen, bereken je premie en sluit meteen je verzekering af'
         %p
           = 'Een uitvaartverzekering afsluiten is misschien niet iets waar je graag mee bezig bent. Maar een waardig afscheid is een essentieel onderdeel van het rouwproces. Daarom proberen wij je te helpen met het versimpelen van het vergelijkings proces. U vindt hier in een oogopslag de verschillende verzekeraars van grote spelers op de markt als Monuta tot de wat onbekendere maar vaak ook goedkopere kleinere verzekeraars zoals Yarden. Zodra je een verzekeraar en uitvaartverzekering hebt gekozen klik je op bereken premie en je kan direct een verzekering afsluiten.'
-.main-wrapper
+.main-wrapper.gradient-grey.with-border
   .container.container-padding
     .row
-      .col-md-12
+      .col-md-12.testingzz
         %table{ class: 'table', id: 'comparison-table' }
           %td
             = ''
@@ -30,7 +30,8 @@
           - @insurers.each do |insurer|
             %tr
               %td
-                = link_to insurer.name, insurer_path(insurer), class: ['clickable-cell']
+                = link_to insurer_path(insurer), class: ['clickable-cell'] do
+                  = image_tag insurer.logo.thumb.url, title: insurer.name
               %td
                 = insurer.description
               %td
