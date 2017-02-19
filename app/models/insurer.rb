@@ -1,6 +1,9 @@
 class Insurer < ActiveRecord::Base
   include Publishable
   include FriendlyId
+
+  mount_uploader :logo, LogoUploader
+
   has_many :answers
 
   friendly_id :name, use: :slugged

@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20170217103705) do
     t.string   "slug"
     t.string   "name"
     t.text     "description"
+    t.string   "logo"
     t.decimal  "price",            precision: 8, scale: 2
     t.decimal  "insured_amount",   precision: 8, scale: 2
     t.text     "extra_info"

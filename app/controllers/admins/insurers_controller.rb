@@ -34,11 +34,11 @@ class Admins::InsurersController < Admins::AdminsController
   protected
 
     def permitted_params
-      params.require(:insurer).permit(:name, :description, :price, :insured_amount, :extra_info, :affiliate_link, :meta_description, :meta_keywords, :meta_page_title)
+      params.require(:insurer).permit(:name, :description, :price, :insured_amount, :extra_info, :affiliate_link, :meta_description, :meta_keywords, :meta_page_title, :logo)
     end
 
     def find_insurer
-      @insurer = Insurer.find(params[:id])
+      @insurer = Insurer.friendly.find(params[:id])
     end
 
 end
