@@ -18,6 +18,12 @@
     right: 0
     opacity: 1
 
+  &.sub-masthead
+    min-height: 300px
+
+    &:after
+      background-image: image-url('masthead/wave-masthead.jpeg')
+
   .main-headline-area
     width: 620px
     position: relative
@@ -27,3 +33,13 @@
     line-height: 60px
     padding-top: 50px
     padding-left: 25px
+
+  .main-single-header
+    position: absolute
+    left: 20px
+    top: 20px
+    z-index: 2
+    +sans-serif-medium
+
+    h1
+      font-size: 50px
