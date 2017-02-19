@@ -5,4 +5,6 @@ class Question < ActiveRecord::Base
   friendly_id :content, use: :slugged
 
   has_many :answers
+
+  scope :per_insurer, -> (insurer) { includes(answers: :insurer).published.select{ |q| q.answers.map(&:insurer).include?(insurer) } }
 end

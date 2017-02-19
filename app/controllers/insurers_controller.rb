@@ -6,6 +6,7 @@ class InsurersController < ApplicationController
   end
 
   def show
+    @insurer_questions = Question.per_insurer(@insurer)
   end
 
   protected
