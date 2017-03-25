@@ -1,5 +1,8 @@
 .main-wrapper
   .container.container-padding
+    .row.margin-bottom
+      .col-md-12
+        = link_to 'nieuwe verzekeraar toevoegen', new_admins_insurer_path, class: ['btn', 'btn-success']
     .row
       .col-md-12
         %table{ class: 'table', id: 'comparison-table' }

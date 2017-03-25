@@ -1,0 +1,22 @@
+.main-wrapper
+  .container.container-padding
+    .row.margin-bottom
+      .col-md-12
+        = link_to 'nieuwe vraag toevoegen', new_admins_question_path, class: ['btn', 'btn-success']
+    .row
+      .col-md-12
+        %table{ class: 'table', id: 'comparison-table' }
+          %td.table-header
+            = 'Inhoud'
+          %td.table-header
+            = 'Gepubliceerd'
+          %td
+            = ''
+          - @questions.each do |question|
+            %tr
+              %td
+                = question.content
+              %td
+                = question.published ? 'Ja' : 'Nee'
+              %td
+                = link_to 'Aanpassen', admins_question_path(question), class: ['btn', 'btn-success']

@@ -1,0 +1,99 @@
+.game-background
+  width: 100%
+  height: 700px
+  background-image: url('dino/dino-game-background1.jpeg')
+  background-size: cover
+  background-position: top center
+  position: relative
+
+.running-dino
+  width: 130px
+  height: 96px
+  background-image: url('dino/running-trex.png')
+  background-size: cover
+  background-position: top center
+  position: absolute
+  top: 285px
+  left: -150px
+
+  &.spinning
+    transform: rotateY(720deg)
+    transform-style: preserve-3d
+    transition: transform 1s
+
+.flying-dino
+  width: 125px
+  height: 191px
+  background-image: url('dino/vlieg-dino.png')
+  background-size: cover
+  background-position: top center
+  position: absolute
+  top: 285px
+  left: -150px
+
+  &.spinning
+    transform: rotateY(720deg)
+    transform-style: preserve-3d
+    transition: transform 1s
+
+  &.pre
+    left: -30px
+    top: 20px
+
+  &.turn-around
+    transform: rotateY(180deg)
+    transform-style: preserve-3d
+    transition: transform 1s
+
+.bad-spino
+  width: 300px
+  height: 140px
+  background-image: url('dino/stoute-spino.png')
+  background-size: cover
+  background-position: top center
+  position: absolute
+  top: 285px
+  left: -400px
+  transform-style: preserve-3d
+  transition: transform 1s
+
+  &.spinning
+    transform: rotateY(720deg)
+    transform-style: preserve-3d
+    transition: transform 1s
+
+  &.pre
+    left: 10px
+    top: auto
+    bottom: 20px
+
+  &.turn-around
+    transform: rotateY(180deg)
+    transform-style: preserve-3d
+    transition: transform 1s
+
+.stego-dino
+  width: 170px
+  height: 140px
+  background-image: url('dino/stego-dino.png')
+  background-size: cover
+  background-position: top center
+  position: absolute
+  top: 285px
+  left: -400px
+
+  &.spinning
+    transform: rotateY(720deg)
+    transform-style: preserve-3d
+    transition: transform 1s
+
+.counter
+  position: absolute
+  left: 20px
+  top: 20px
+  color: black
+
+.start-button
+  position: absolute
+  bottom: 20px
+  left: 50%

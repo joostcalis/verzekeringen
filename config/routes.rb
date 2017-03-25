@@ -1,3 +1,4 @@
+require 'faq_constraint.rb'
 Rails.application.routes.draw do
   devise_for :admins, path: '/admins', controllers: { sessions: 'admins/sessions' }
   # The priority is based upon order of creation: first created -> highest priority.
@@ -7,12 +8,26 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :insurers, only: [:index, :show], path: 'uitvaart-verzekeraars'
-  resources :questions, only: [:index, :show], path: 'veelgestelde-vragen'
+  resources :questions, only: [:index, :show], path: 'veelgestelde-vragen' do
+    collection do
+      get :faq_filter
+    end
+  end
+
+  get '/game' => 'games#show'
 
   namespace :admins do
     get '/control-panel', to: 'control_panel#show'
 
     resources :insurers
+    resources :questions do
+      resources :answers
+    end
+  end
+
+  namespace 'veelgestelde_vragen' do
+    get '/' => 'faqs#index', as: 'faq_root'
+    get '/:insurer_id/:question_id' => 'faqs#index', constraints: FaqConstraint
   end
 
 

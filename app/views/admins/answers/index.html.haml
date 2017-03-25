@@ -1,0 +1,28 @@
+.main-wrapper
+  .container.container-padding
+    .row.margin-bottom
+      .col-md-12
+        %p.form-header
+          = @question.content
+        = link_to 'nieuw antwoord toevoegen', new_admins_question_answer_path(question_id: @question.id), class: ['btn', 'btn-success']
+    .row
+      .col-md-12
+        %table{ class: 'table', id: 'comparison-table' }
+          %td.table-header
+            = 'Inhoud'
+          %td.table-header
+            = 'Verzekeraar'
+          %td.table-header
+            = 'Gepubliceerd'
+          %td
+            = ''
+          - @answers.each do |answer|
+            %tr
+              %td
+                = answer.content
+              %td
+                = answer.insurer.name
+              %td
+                = answer.published ? 'Ja' : 'Nee'
+              %td
+                = link_to 'Aanpassen', admins_question_answer_path(question_id: @question.id, id: answer.id), class: ['btn', 'btn-success']

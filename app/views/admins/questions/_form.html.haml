@@ -1,0 +1,16 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-6.offset-md-3
+        .form-holder
+          - if @question.persisted?
+            = link_to 'Bekijk antwoorden', admins_question_answers_path(question_id: @question.id)
+          = simple_form_for [:admins, @question] do |f|
+
+            = f.error_notification
+            .form-inputs
+              = f.input :content
+              = f.input :published
+
+            .form-actions
+              = f.button :submit, 'Opslaan', id: 'action_save_question', class: ['btn', 'btn-success']

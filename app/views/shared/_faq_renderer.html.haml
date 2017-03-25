@@ -1,0 +1,29 @@
+.row.margin-top
+  .col-md-12
+    .background-wrapper.white.with-full-border.padding-full.margin-bottom
+      .margin-bottom
+        - if single_insurer
+          = link_to insurers.first.affiliate_link do
+            = image_tag insurers.first.logo.thumb.url
+          = link_to 'Bereken premie', insurers.first.affiliate_link, class: ['btn', 'btn-success', 'pull-right']
+        - else
+          %h2
+            = 'Alle verzekeraars'
+      %ul
+        - questions.each do |question|
+          %li
+            = link_to question.content, question_path(question)
+            %ul.margin-top.list-unstyled
+              - if single_insurer
+                %li.margin-bottom-extra
+                  = insurers.first.answers.where(question_id: question.id).first.content
+              - else
+                - insurers.each do |insurer|
+                  %li.margin-bottom-extra
+                    .inline-anchor
+                      .inline-left
+                        = link_to insurer.affiliate_link do
+                          = image_tag insurer.logo.thumb.url
+                      .inline-right.margin-left
+                        %span
+                          = insurer.answers.where(question_id: question.id).first.content

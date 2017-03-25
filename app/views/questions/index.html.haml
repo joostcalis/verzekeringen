@@ -6,14 +6,34 @@
           = 'Vergelijk direct de antwoorden van elke uitvaartverzekeraar op al uw veelgestelde vragen'
         %p
           = 'Tot welk bedrag gaan de verschillende uitvaartverzekeringen? Ik zie een hele goedkope uitvaartverzekering, maar wat voor dekking heb ik dan eigenlijk? Vergelijk hier per uitvaartverzekeraar de antwoorden die zij geven op al uw veelgestelde vragen.'
+
+.main-wrapper.gradient-grey.with-top-border
+  .container.container-padding
     .row
-      .col-md-12
-        %ul
-          - @questions.each do |question|
-            %li
-              = link_to question.content, question_path(question)
-              %ul
-                - Insurer.all.each do |insurer|
-                  %li
-                    - if question.answers.map(&:insurer).include?(insurer)
-                      = "#{insurer.name} - #{insurer.answers.where(question_id: question.id).first.content}"
+      .col-md-4.offset-md-2
+        .form-group
+          %label{ for: 'insurer-filter' }
+            = 'Kies de verzekeraar'
+          %select{ class: ['form-control', 'faq-filter'], id: 'insurer-filter', data: { url: faq_filter_questions_path } }
+            %option{value: 'All'}
+              = 'Alle'
+            - @insurers.each do |insurer|
+              %option{ value: insurer.id}
+                = insurer.name
+      .col-md-4
+        .form-group
+          %label{ for: 'question-filter' }
+            = 'Kies de vraag die je beantwoord wilt hebben'
+          %select{ class: ['form-control', 'faq-filter'], id: 'question-filter', data: { url: faq_filter_questions_path } }
+            %option{value: 'All'}
+              = 'Alle'
+            - @questions.each do |question|
+              %option{value: question.id }
+                = question.content
+  .container.faq-renderer
+    = render partial: 'shared/faq_renderer', locals: { questions: @questions, single_insurer: false, insurers: @insurers}
+
+:javascript
+  $(document).ready(function() {
+    faqFilter();
+  });

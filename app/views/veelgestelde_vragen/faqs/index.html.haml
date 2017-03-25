@@ -1,0 +1,47 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-12
+        %h2
+          = 'Vergelijk direct de antwoorden van elke uitvaartverzekeraar op al uw veelgestelde vragen'
+        %p
+          = 'Tot welk bedrag gaan de verschillende uitvaartverzekeringen? Ik zie een hele goedkope uitvaartverzekering, maar wat voor dekking heb ik dan eigenlijk? Vergelijk hier per uitvaartverzekeraar de antwoorden die zij geven op al uw veelgestelde vragen.'
+
+.main-wrapper.gradient-grey.with-top-border
+  .container.container-padding
+    .row
+      .col-md-4.offset-md-2
+        .form-group
+          %label{ for: 'insurer-filter' }
+            = 'Kies de verzekeraar'
+          %select{ class: ['form-control', 'faq-filter'], id: 'insurer-filter' }
+            %option{value: 'All', data: { slug: 'alle' } }
+              = 'Alle'
+            - @all_insurers.each do |insurer|
+              - if @single_insurer
+                - selected = insurer == @insurers.first ? 'selected' : false
+              - else
+                - selected = false
+              %option{ value: insurer.id, selected: selected, data: { slug: insurer.slug } }
+                = insurer.name
+      .col-md-4
+        .form-group
+          %label{ for: 'question-filter' }
+            = 'Kies de vraag die je beantwoord wilt hebben'
+          %select{ class: ['form-control', 'faq-filter'], id: 'question-filter', data: { url: faq_filter_questions_path } }
+            %option{value: 'All', data: { slug: 'alle' } }
+              = 'Alle'
+            - @all_questions.each do |question|
+              - if @single_question
+                - selected = question == @questions.first ? 'selected' : false
+              - else
+                - selected = false
+              %option{value: question.id, selected: selected, data: { slug: question.slug }  }
+                = question.content
+  .container.faq-renderer
+    = render partial: 'shared/faq_renderer', locals: { questions: @questions, single_insurer: @single_insurer, insurers: @insurers}
+
+:javascript
+  $(document).ready(function() {
+    faqFilter();
+  });
