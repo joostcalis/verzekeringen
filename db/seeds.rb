@@ -26,36 +26,36 @@ end
 
 def create_insurers
   puts 'creating insurers'
-  (1..5).each do |index|
-    name = "Monuta - #{index}"
-    second_name = "Yarden - #{index}"
-    link = "www.mlb.com - #{index}"
-    second_link = "www.google.com - #{index}"
-    title = "Uitvaartverzekering Monuta #{index}"
-    second_title = "Uitvaartverzekering Yarden #{index}"
-    Insurer.create!(
-      name: name,
-      description: 'Hele vette verzekeraar',
-      price: 100,
-      insured_amount: 6000,
-      extra_info: 'Bijna de pijp uit? Wij zijn de verzekering voor jou',
-      affiliate_link: link,
-      meta_keywords: 'heel veel vette keywords voor googleeee',
-      meta_page_title: title,
-      meta_description: 'Super vette beschrijving'
-    )
-    Insurer.create!(
-      name: second_name,
-      description: 'Kut verzekeraar, maar wel goedkoop',
-      price: 20,
-      insured_amount: 4000,
-      extra_info: 'Goedkoop tot in de dood? Wij zijn de verzekering voor jou',
-      affiliate_link: second_link,
-      meta_keywords: 'goedkope troep verzekerking hoor',
-      meta_page_title: second_title,
-      meta_description: 'Super goedkope beschrijving'
-    )
-  end
+  name = "Monuta"
+  second_name = "Yarden"
+  link = "www.mlb.com"
+  second_link = "www.google.com"
+  title = "Uitvaartverzekering Monuta"
+  second_title = "Uitvaartverzekering Yarden"
+  Insurer.create!(
+    name: name,
+    description: 'Hele vette verzekeraar',
+    price: 100,
+    insured_amount: 6000,
+    extra_info: 'Bijna de pijp uit? Wij zijn de verzekering voor jou',
+    affiliate_link: link,
+    meta_keywords: 'heel veel vette keywords voor googleeee',
+    meta_page_title: title,
+    meta_description: 'Super vette beschrijving',
+    published: true
+  )
+  Insurer.create!(
+    name: second_name,
+    description: 'Minder goede verzekeraar, maar wel goedkoop',
+    price: 20,
+    insured_amount: 4000,
+    extra_info: 'Goedkoop tot in de dood? Wij zijn de verzekering voor jou',
+    affiliate_link: second_link,
+    meta_keywords: 'goedkope verzekerking hoor',
+    meta_page_title: second_title,
+    meta_description: 'Super goedkope beschrijving',
+    published: true
+  )
 end
 
 def create_admins
@@ -79,21 +79,21 @@ def create_answers
   answers = ['Dat weet je nooit, het zou zo maar kunnen', 'Verzeker je bij ons en we vertellen je het', 'Filosofisch gezien zou het in principe kunnen']
   ['Bestaat er een god?', 'Ben ik verzekerd van een plekje in de hemel?', 'Wanneer is het mijn tijd?'].each do |question_content|
     categories = SubjectCategory.order("RANDOM()").limit(2)
-    (1..30).each do |index|
-      q_name = [question_content, index].join('-')
-      question = create_question(q_name, categories)
-      Insurer.all.each do |insurer|
-        Answer.create(
-          content: answers.sample,
-          question: question,
-          insurer: insurer,
-          score: rand(1..6)
-        )
-      end
+    q_name = question_content
+    question = create_question(q_name, categories)
+    Insurer.all.each do |insurer|
+      Answer.create(
+        content: answers.sample,
+        question: question,
+        insurer: insurer,
+        score: rand(1..6),
+        published: true
+      )
     end
   end
 end
 
+#not implemented yet
 def create_form_questions
   puts 'creating form_questions'
   SubjectCategory.all.each do |category|
@@ -109,4 +109,3 @@ create_subject_categories
 create_insurers
 create_admins
 create_answers
-create_form_questions
