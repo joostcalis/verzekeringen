@@ -29,6 +29,7 @@ gem 'acts_as_list'
 gem 'friendly_id', '~> 5.1.0'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
+gem 'puma'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
