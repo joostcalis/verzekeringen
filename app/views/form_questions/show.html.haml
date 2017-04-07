@@ -1,0 +1,16 @@
+- form_path = @form_answer.persisted? ? test_form_form_question_form_answer_path(test_form_id: @test_form.id, form_question_id: @form_question.id, id: @form_answer.id) : test_form_form_question_form_answers_path(test_form_id: @test_form.id, form_question_id: @form_question.id)
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-12
+        %p
+          = [@form_question.position, @form_question.content].join('  -  ')
+        .form-holder
+          = simple_form_for @form_answer, url: form_path do |f|
+
+            = f.error_notification
+            .form-inputs
+              = f.input :score
+
+            .form-actions
+              = f.button :submit, 'Volgende vraag', id: 'action_save_form_question', class: ['btn', 'btn-success']

@@ -13,6 +13,8 @@
             = link_to insurer.name, insurer_path(insurer), class: 'nav-link'
         %li.nav-item
           = link_to 'Veelgestelde vragen', veelgestelde_vragen_faq_root_path, class: 'nav-link'
+        %li.nav-item
+          = link_to (test_form_template = TestFormTemplate.first).name, test_form_template_path(test_form_template), class: 'nav-link'
 
   - elsif admin_signed_in_scope?
     %div{ class: ['collapse', 'navbar-collapse'], id: 'navbarSupportedContent' }
@@ -21,6 +23,8 @@
           = link_to 'Verzekeringen', admins_insurers_path, class: 'nav-link'
         %li.nav-item
           = link_to 'Vragen', admins_questions_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'test formulieren', admins_test_form_templates_path, class: 'nav-link'
       %ul{ class: ['nav', 'navbar-nav'] }
         %li.nav-item
           = link_to 'Log uit', destroy_admin_session_path, class: ['btn', 'btn-primary'], method: :delete

@@ -1,0 +1,29 @@
+.main-wrapper
+  .container.container-padding
+    .row.margin-bottom
+      .col-md-12
+        %p
+          = "Vragen die horen bij de test: "
+          = link_to @test_form_template.name, admins_test_form_template_path(@test_form_template)
+        = link_to 'nieuwe test vraag toevoegen', new_admins_test_form_template_form_question_path, class: ['btn', 'btn-success']
+    .row
+      .col-md-12
+        %table{ class: 'table', id: 'comparison-table' }
+          %td.table-header
+            = 'inhoud'
+          %td.table-header
+            = 'Gepubliceerd'
+          %td.table-header
+            = 'Positie in lijst'
+          %td
+            = ''
+          - @form_questions.each do |form_question|
+            %tr
+              %td
+                = form_question.content
+              %td
+                = form_question.position
+              %td
+                = form_question.published ? 'Ja' : 'Nee'
+              %td
+                = link_to 'Aanpassen', admins_test_form_template_form_question_path(test_form_template_id: @test_form_template.id, id: form_question.id), class: ['btn', 'btn-success']

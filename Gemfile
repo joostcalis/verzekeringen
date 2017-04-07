@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'simple_form'
+gem 'acts_as_list'
 gem 'friendly_id', '~> 5.1.0'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"

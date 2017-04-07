@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217103705) do
+ActiveRecord::Schema.define(version: 20170402212535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,11 +42,46 @@ ActiveRecord::Schema.define(version: 20170217103705) do
     t.boolean  "published"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "score"
   end
 
   add_index "answers", ["content"], name: "index_answers_on_content", using: :btree
   add_index "answers", ["insurer_id"], name: "index_answers_on_insurer_id", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+
+  create_table "form_answers", force: :cascade do |t|
+    t.integer "score"
+    t.integer "form_question_id"
+    t.integer "test_form_id"
+  end
+
+  add_index "form_answers", ["form_question_id"], name: "index_form_answers_on_form_question_id", using: :btree
+  add_index "form_answers", ["test_form_id"], name: "index_form_answers_on_test_form_id", using: :btree
+
+  create_table "form_questions", force: :cascade do |t|
+    t.string  "name"
+    t.text    "content"
+    t.integer "type"
+    t.string  "slug"
+    t.boolean "published"
+    t.integer "position"
+  end
+
+  create_table "form_questions_subject_categories", id: false, force: :cascade do |t|
+    t.integer "form_question_id",    null: false
+    t.integer "subject_category_id", null: false
+  end
+
+  add_index "form_questions_subject_categories", ["form_question_id", "subject_category_id"], name: "index_fq_id_on_sc_id", using: :btree
+  add_index "form_questions_subject_categories", ["subject_category_id", "form_question_id"], name: "index_sc_id_on_fq_id", using: :btree
+
+  create_table "form_questions_test_form_templates", id: false, force: :cascade do |t|
+    t.integer "form_question_id",      null: false
+    t.integer "test_form_template_id", null: false
+  end
+
+  add_index "form_questions_test_form_templates", ["form_question_id", "test_form_template_id"], name: "index_fq_id_on_tft_id", using: :btree
+  add_index "form_questions_test_form_templates", ["test_form_template_id", "form_question_id"], name: "index_tft_id_on_fq_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -88,6 +123,36 @@ ActiveRecord::Schema.define(version: 20170217103705) do
 
   add_index "questions", ["content"], name: "index_questions_on_content", using: :btree
 
+  create_table "questions_subject_categories", id: false, force: :cascade do |t|
+    t.integer "question_id",         null: false
+    t.integer "subject_category_id", null: false
+  end
+
+  add_index "questions_subject_categories", ["question_id", "subject_category_id"], name: "index_q_id_on_sc_id", using: :btree
+  add_index "questions_subject_categories", ["subject_category_id", "question_id"], name: "index_sc_id_on_q_id", using: :btree
+
+  create_table "subject_categories", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "test_form_templates", force: :cascade do |t|
+    t.integer "type"
+    t.string  "name"
+    t.boolean "published"
+    t.string  "slug"
+  end
+
+  create_table "test_forms", force: :cascade do |t|
+    t.integer "type"
+    t.string  "name"
+    t.integer "test_form_template_id"
+  end
+
+  add_index "test_forms", ["test_form_template_id"], name: "index_test_forms_on_test_form_template_id", using: :btree
+
   add_foreign_key "answers", "insurers"
   add_foreign_key "answers", "questions"
+  add_foreign_key "form_answers", "form_questions"
+  add_foreign_key "form_answers", "test_forms"
+  add_foreign_key "test_forms", "test_form_templates"
 end

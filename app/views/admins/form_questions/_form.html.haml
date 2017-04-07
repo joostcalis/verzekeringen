@@ -1,0 +1,20 @@
+- form_url = @form_question.persisted? ? admins_test_form_template_form_question_path(test_form_template_id: @test_form_template.id) : admins_test_form_template_form_questions_path(test_form_template_id: @test_form_template.id, id: @form_question.id)
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-6.offset-md-3
+        .form-holder
+          %p
+            = "Deze vraag hoort bij: "
+            = link_to @test_form_template.name, admins_test_form_template_path(@test_form_template)
+          = simple_form_for @form_question, url: form_url do |f|
+
+            = f.error_notification
+            .form-inputs
+              = f.input :name
+              = f.input :content
+              = f.input :position
+              = f.association :subject_categories
+
+            .form-actions
+              = f.button :submit, 'Opslaan', id: 'action_save_form_question', class: ['btn', 'btn-success']

@@ -1,0 +1,15 @@
+.main-wrapper
+  .container.container-padding
+    .row
+      .col-md-6.offset-md-3
+        .form-holder
+          - if @test_form_template.persisted?
+            = link_to 'Bekijk de test vragen van deze test', admins_test_form_template_form_questions_path(test_form_template_id: @test_form_template.id)
+          = simple_form_for [:admins, @test_form_template] do |f|
+
+            = f.error_notification
+            .form-inputs
+              = f.input :name
+
+            .form-actions
+              = f.button :submit, 'Opslaan', id: 'action_save_test_form_template', class: ['btn', 'btn-success']

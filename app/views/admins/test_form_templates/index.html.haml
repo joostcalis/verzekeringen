@@ -1,0 +1,22 @@
+.main-wrapper
+  .container.container-padding
+    .row.margin-bottom
+      .col-md-12
+        = link_to 'nieuwe test toevoegen', new_admins_test_form_template_path, class: ['btn', 'btn-success']
+    .row
+      .col-md-12
+        %table{ class: 'table', id: 'comparison-table' }
+          %td.table-header
+            = 'naam'
+          %td.table-header
+            = 'Gepubliceerd'
+          %td
+            = ''
+          - @test_form_templates.each do |test_form_template|
+            %tr
+              %td
+                = test_form_template.name
+              %td
+                = test_form_template.published ? 'Ja' : 'Nee'
+              %td
+                = link_to 'Aanpassen', admins_test_form_template_path(test_form_template), class: ['btn', 'btn-success']
