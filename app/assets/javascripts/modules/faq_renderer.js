@@ -9,7 +9,7 @@ function faqFilter() {
 }
 
 function updateFaqFilter(url) {
-  location.replace(url)
+  location.replace(url);
 }
 
 $(document).ready(function() {
