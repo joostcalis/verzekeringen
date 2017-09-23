@@ -14,7 +14,7 @@
           %li
             = link_to question.content, question_path(question)
             %ul.margin-top.list-unstyled
-              - if single_insurer
+              - if false
                 %li.margin-bottom-extra
                   = insurers.first.answers.where(question_id: question.id).first.content
               - else
